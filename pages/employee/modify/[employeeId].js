@@ -6,7 +6,7 @@ import { FaArrowLeftLong, FaUserPen, FaXmark } from "react-icons/fa6";
 import * as yup from "yup"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { AlertFetching, AlertSuccess, AlertError } from "../../components/Alert";
+import { AlertFetching, AlertSuccess, AlertError } from './../../components/Alert';
 
 const schema = yup.object({
     firstname: yup.string().required(),

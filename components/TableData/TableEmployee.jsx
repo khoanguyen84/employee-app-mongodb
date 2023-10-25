@@ -39,7 +39,7 @@ function TableEmployee() {
                             <tr role="button" key={employee._id} className="hover:bg-neutral-content">
                                 <td>
                                     <div className="flex items-center">
-                                        <img className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
+                                        <Image className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
                                         {employee.firstname} {employee.lastname}
                                     </div>
                                 </td>
