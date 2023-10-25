@@ -3,6 +3,7 @@ import { FaUserPen, FaUserSlash } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query'
 import { AlertFetching, AlertError } from "../Alert";
 import Link from "next/link";
+import Image from "next/image";
 
 function TableEmployee() {
     const fetchingData = async () => {
@@ -38,7 +39,7 @@ function TableEmployee() {
                             <tr role="button" key={employee._id} className="hover:bg-neutral-content">
                                 <td>
                                     <div className="flex items-center">
-                                        <img className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
+                                        <Image className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
                                         {employee.firstname} {employee.lastname}
                                     </div>
                                 </td>
