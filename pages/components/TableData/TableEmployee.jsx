@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaUserPen, FaUserSlash } from "react-icons/fa6";
+import { useQuery } from '@tanstack/react-query'
+import AlertFetching from "../Alert/AlertFetching";
+import AlertError from "../Alert/AlertError";
 
 function TableEmployee() {
-    const [employeeList, setEmployeeList] = useState([])
-
-    useEffect(() => {
-        async function fetchData() {
-            let res = await fetch('http://localhost:3000/api/employees')
-            let data = await res.json();
-            setEmployeeList(data)
-        }
-        fetchData()
-    }, [])
+    const fetchingData = async () => {
+        let res = await fetch('http://localhost:3000/api/employees')
+        let data = await res.json()
+        return data;
+    }
+    const { isPending, data, isError, isFetching } = useQuery({
+        queryKey: ['repoEmployee'],
+        queryFn: fetchingData
+    })
     return (
         <div className='container mx-auto px-20 mt-3'>
+            {isFetching && <AlertFetching />}
+            {isError && <AlertError />}
             <table className='table'>
                 <thead className='bg-neutral text-white'>
                     <tr>
@@ -27,27 +31,29 @@ function TableEmployee() {
                 </thead>
                 <tbody>
                     {
-                        employeeList.map((employee) => (
-                            <tr key={employee.id}>
+                        data?.map((employee) => (
+                            <tr role="button" key={employee.id} className="hover:bg-neutral-content">
                                 <td>
                                     <div className="flex items-center">
                                         <img className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
                                         {employee.firstname} {employee.lastname}
                                     </div>
                                 </td>
-                                <td>{employee.email}</td>
-                                <td>{employee.salary}</td>
-                                <td>{employee.dob}</td>
-                                <td>
-                                    <span className={`badge ${employee.status == 'Active' ? 'badge-success' : 'badge-seconday'}`}>{employee.status}</span>
+                                <td className="text-right">{employee.email}</td>
+                                <td className="text-right">{employee.salary}</td>
+                                <td className="text-right">{(new Date(employee.dob)).toLocaleDateString("es-CL")}</td>
+                                <td className="text-right">
+                                    <span className={`badge ${employee.status == 'Active' ? 'badge-success' : 'badge-warning'}`}>{employee.status}</span>
                                 </td>
                                 <td>
-                                    <div className="flex">
-                                        <div className="tooltip tooltip-left tooltip-info" data-tip='modify user'>
+                                    <div>
+                                        <div className="tooltip tooltip-top tooltip-info" data-tip='modify employee'>
                                             <FaUserPen role="button" className="text-blue-500 me-3 hover:text-blue-800" size={20} />
                                         </div>
-                                        <div className="tooltip tooltip-right tooltip-info" data-tip='remove user'>
-                                            <FaUserSlash role="button" className="text-red-500 hover:text-red-800" size={20} />
+                                        <div className="tooltip tooltip-top tooltip-info" data-tip='remove employee'>
+                                            <FaUserSlash role="button" className="text-red-500 hover:text-red-800" size={20}
+                                                
+                                            />
                                         </div>
                                     </div>
                                 </td>
@@ -56,7 +62,7 @@ function TableEmployee() {
                     }
                 </tbody>
             </table>
-        </div>
+        </div >
     )
 }
 

@@ -16,18 +16,18 @@ export default function Home() {
 
       <main className='container mx-auto py-3'>
         <h1 className="text-center text-3xl text-stone-700">Employee Management</h1>
-        
+
         {/* Form */}
         <div className='container mx-auto px-20'>
-            <button className='btn btn-primary btn-sm' onClick={() => setToggleForm(!toggleForm)}>
-                Add Employee
-                <FaPersonCirclePlus size={20} />
-            </button>
-            {toggleForm && <Form/>}
+          <button className='btn btn-primary btn-sm' onClick={() => setToggleForm(!toggleForm)}>
+            Add Employee
+            <FaPersonCirclePlus size={20} />
+          </button>
+          {toggleForm && <Form />}
         </div>
-        
+
         {/* Table */}
-        <TableEmployee/>
+        <TableEmployee />
       </main>
     </section>
   )

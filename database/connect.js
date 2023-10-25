@@ -8,7 +8,7 @@ const connectMongo = async () => {
             console.log("Database Connected");
         }
     } catch (error) {
-        return Promise.reject(error)
+        return await Promise.reject(error)
     }
 }
 

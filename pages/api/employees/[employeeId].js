@@ -1,5 +1,5 @@
 import connectMongo from "../../../database/connect"
-import { getEmployees, postEmployee } from "../../../database/userRepository";
+import { getEmployee, putEmployee, deleteEmployee } from "../../../database/userRepository";
 
 async function handler(req, res) {
     connectMongo().catch(() => res.status(405).json({ error: 'Error in connection' }))
@@ -7,11 +7,15 @@ async function handler(req, res) {
 
     switch (method) {
         case "GET": {
-            getEmployees(req, res)
+            getEmployee(req, res)
             break;
         }
-        case "POST": {
-            postEmployee(req, res)
+        case "PUT": {
+            putEmployee(req, res)
+            break;
+        }
+        case "DELETE": {
+            deleteEmployee(req, res)
             break;
         }
         default: {
