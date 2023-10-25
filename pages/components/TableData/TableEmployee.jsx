@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaUserPen, FaUserSlash } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query'
-import {AlertFetching, AlertError} from "../Alert";
+import { AlertFetching, AlertError } from "../Alert";
 import Link from "next/link";
 
 function TableEmployee() {
@@ -52,7 +52,7 @@ function TableEmployee() {
                                     <div>
                                         <div className="tooltip tooltip-top tooltip-info" data-tip='modify employee'>
                                             <Link href={`/employee/modify/${employee._id}`}>
-                                                <FaUserPen role="button" className="text-blue-500 me-3 hover:text-blue-800" size={20}/>
+                                                <FaUserPen role="button" className="text-blue-500 me-3 hover:text-blue-800" size={20} />
                                             </Link>
                                         </div>
                                         <div className="tooltip tooltip-top tooltip-info" data-tip='remove employee'>
@@ -63,14 +63,14 @@ function TableEmployee() {
                                     </div>
                                 </td>
                             </tr>
-                        )) : 
-                        (
-                            <tr>
-                                <td colSpan={6}>
-                                    Data is empty
-                                </td>
-                            </tr>
-                        )
+                        )) :
+                            (
+                                <tr>
+                                    <td colSpan={6}>
+                                        Data is empty
+                                    </td>
+                                </tr>
+                            )
                     }
                 </tbody>
             </table>

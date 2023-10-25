@@ -2,11 +2,11 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { FaArrowLeftLong, FaUserPlus, FaXmark } from "react-icons/fa6";
+import { FaArrowLeftLong, FaUserPen, FaXmark } from "react-icons/fa6";
 import * as yup from "yup"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import {AlertFetching, AlertSuccess} from "../../components/Alert";
+import { AlertFetching, AlertSuccess, AlertError } from "../../components/Alert";
 
 const schema = yup.object({
     firstname: yup.string().required(),
@@ -69,8 +69,8 @@ export default function ModifyEmployee() {
             </div>
             <div className="container mx-auto px-20 mt-3">
                 {isFetching && <AlertFetching />}
-                {mutation.isSuccess && <AlertSuccess content={"Employee updated success!"}/>}
-                {mutation.isError && <AlertError content={"Something went wrong, please try again later!"}/>}
+                {mutation.isSuccess && <AlertSuccess content={"Employee updated success!"} />}
+                {mutation.isError && <AlertError content={"Something went wrong, please try again later!"} />}
                 {
                     data && Object.keys(data).length > 0 && (
                         <form onSubmit={handleSubmit(handleCreateEmployee)} className='mt-3 border-t-2 border-dark-500'>
@@ -160,7 +160,7 @@ export default function ModifyEmployee() {
                                     <div>
                                         <button type="submit" className='btn btn-success btn-sm mr-3'>
                                             Save
-                                            <FaUserPlus size={20} />
+                                            <FaUserPen size={20} />
                                         </button>
                                         <Link href={'/employee'} type="button" className='btn btn-neutral btn-sm'
                                         >
