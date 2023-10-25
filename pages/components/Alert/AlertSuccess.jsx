@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
-function AlertSuccess({ content }) {
+
+export function AlertSuccess({ content }) {
     const [show, setShow] = useState(true)
     useEffect(() => {
         const timerId = setTimeout(() => {
@@ -23,4 +24,3 @@ function AlertSuccess({ content }) {
         </>
     )
 }
-export default AlertSuccess;

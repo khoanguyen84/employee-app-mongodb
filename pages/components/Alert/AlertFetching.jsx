@@ -1,7 +1,7 @@
 import React from "react";
 import { FaArrowsRotate } from "react-icons/fa6";
 
-function AlertFetching({ content }) {
+export function AlertFetching({ content }) {
     return (
         <div className="alert alert-success py-1 mb-1">
             <FaArrowsRotate size={25} className="text-white" />
@@ -12,4 +12,3 @@ function AlertFetching({ content }) {
         </div>
     )
 }
-export default AlertFetching;

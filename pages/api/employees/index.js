@@ -7,11 +7,11 @@ async function handler(req, res) {
 
     switch (method) {
         case "GET": {
-            getEmployees(req, res)
+            await getEmployees(req, res)
             break;
         }
         case "POST": {
-            postEmployee(req, res)
+            await postEmployee(req, res)
             break;
         }
         default: {

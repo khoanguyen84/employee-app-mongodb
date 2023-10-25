@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserPen, FaUserSlash } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query'
-import AlertFetching from "../Alert/AlertFetching";
-import AlertError from "../Alert/AlertError";
+import {AlertFetching, AlertError} from "../Alert";
+import Link from "next/link";
 
 function TableEmployee() {
     const fetchingData = async () => {
-        let res = await fetch('http://localhost:3000/api/employees')
+        let res = await fetch('http://localhost:3000/api/employees', {
+            headers: { 'Content-type': 'application/json' }
+        })
         let data = await res.json()
         return data;
     }
@@ -14,8 +16,9 @@ function TableEmployee() {
         queryKey: ['repoEmployee'],
         queryFn: fetchingData
     })
+
     return (
-        <div className='container mx-auto px-20 mt-3'>
+        <div className='container mx-auto px-20 mt-3 relative'>
             {isFetching && <AlertFetching />}
             {isError && <AlertError />}
             <table className='table'>
@@ -31,8 +34,8 @@ function TableEmployee() {
                 </thead>
                 <tbody>
                     {
-                        data?.map((employee) => (
-                            <tr role="button" key={employee.id} className="hover:bg-neutral-content">
+                        data && data.length > 0 ? data?.map((employee) => (
+                            <tr role="button" key={employee._id} className="hover:bg-neutral-content">
                                 <td>
                                     <div className="flex items-center">
                                         <img className="w-10 rounded-full mr-3" src={employee.avatar} alt="" />
@@ -41,29 +44,39 @@ function TableEmployee() {
                                 </td>
                                 <td className="text-right">{employee.email}</td>
                                 <td className="text-right">{employee.salary}</td>
-                                <td className="text-right">{(new Date(employee.dob)).toLocaleDateString("es-CL")}</td>
+                                <td className="text-right">{new Date(Number(employee.dob)).toLocaleDateString("es-CL")}</td>
                                 <td className="text-right">
                                     <span className={`badge ${employee.status == 'Active' ? 'badge-success' : 'badge-warning'}`}>{employee.status}</span>
                                 </td>
                                 <td>
                                     <div>
                                         <div className="tooltip tooltip-top tooltip-info" data-tip='modify employee'>
-                                            <FaUserPen role="button" className="text-blue-500 me-3 hover:text-blue-800" size={20} />
+                                            <Link href={`/employee/modify/${employee._id}`}>
+                                                <FaUserPen role="button" className="text-blue-500 me-3 hover:text-blue-800" size={20}/>
+                                            </Link>
                                         </div>
                                         <div className="tooltip tooltip-top tooltip-info" data-tip='remove employee'>
                                             <FaUserSlash role="button" className="text-red-500 hover:text-red-800" size={20}
-                                                
+
                                             />
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                        ))
+                        )) : 
+                        (
+                            <tr>
+                                <td colSpan={6}>
+                                    Data is empty
+                                </td>
+                            </tr>
+                        )
                     }
                 </tbody>
             </table>
         </div >
     )
 }
+
 
 export default TableEmployee;

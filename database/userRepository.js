@@ -9,7 +9,8 @@ export async function getEmployees(req, res) {
         }
         res.status(200).json(employees)
     } catch (error) {
-        res.status(404).json({ error: "Error While Fetching Data" })
+        console.log(error);
+        return res.status(404).json({ error: "Error While Fetching Data" })
     }
 }
 
@@ -22,9 +23,9 @@ export async function getEmployee(req, res) {
         if (!employee) {
             return res.status(404).json({ error: "EmployeeId not Found" })
         }
-        res.status(200).json(employee)
+        return res.status(200).json(employee)
     } catch (error) {
-        res.status(404).json({ error: "Error While Fetching Data" })
+        return res.status(404).json({ error: "Error While Fetching Data" })
     }
 }
 
@@ -37,8 +38,7 @@ export async function postEmployee(req, res) {
         const data = await Employees.create(formData)
         return res.status(200).json(data)
     } catch (error) {
-        console.log(error);
-        res.status(404).json({ error: "Error While Create Employee" })
+        return res.status(404).json({ error: "Error While Create Employee" })
     }
 }
 
@@ -54,7 +54,7 @@ export async function putEmployee(req, res) {
         return res.status(404).json({ error: 'Can not update employee, please try again!' })
         
     } catch (error) {
-        res.status(404).json({ error: 'Error While Update Employee' })
+        return res.status(404).json({ error: 'Error While Update Employee' })
     }
 }
 
@@ -68,6 +68,6 @@ export async function deleteEmployee(req, res){
         return res.status(404).json({ error: 'Can not delete the employee, please try again!' })
         
     } catch (error) {
-        res.status(404).json({error: 'Error While Delete Employee'})
+        return res.status(404).json({error: 'Error While Delete Employee'})
     }
 }

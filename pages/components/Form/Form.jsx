@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import AlertSuccess from "../Alert/AlertSuccess";
+import { AlertSuccess } from "../Alert";
 
 const schema = yup.object({
     firstname: yup.string().required(),
@@ -20,7 +20,7 @@ function Form() {
     })
     const queryClient = useQueryClient()
 
-    const mutation  = useMutation({
+    const mutation = useMutation({
         mutationFn: async (employee) => {
             let res = await fetch('http://localhost:3000/api/employees', {
                 method: "POST",
@@ -38,14 +38,15 @@ function Form() {
     })
 
     const handleCreateEmployee = (data) => {
-        data.avatar = `https://randomuser.me/api/portraits/men/${Math.ceil(Math.random()*55)}.jpg`   
+        data.avatar = `https://randomuser.me/api/portraits/men/${Math.ceil(Math.random() * 55)}.jpg`
+        data.dob = (new Date(data.dob).getTime())
         mutation.mutate(data)
         reset();
     }
 
     return (
         <>
-            {mutation.isSuccess && <AlertSuccess content={"Employee created success!"}/>}
+            {mutation.isSuccess && <AlertSuccess content={"Employee created success!"} />}
             <form onSubmit={handleSubmit(handleCreateEmployee)} className='mt-3 border-t-2 border-dark-500'>
                 <div className='grid grid-cols-3 gap-x-3'>
                     <div className='form-control'>
