@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AlertSuccess } from "../Alert";
+import AlertSuccess from "../Alert/AlertSuccess";
 import { API_URI } from "../../../common/constant";
 
 const schema = yup.object({

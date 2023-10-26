@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaCircleXmark } from "react-icons/fa6";
 
-export function AlertError({ content }) {
+export default function AlertError({ content }) {
     const [show, setShow] = useState(true)
     useEffect(() => {
         const timerId = setTimeout(() => {

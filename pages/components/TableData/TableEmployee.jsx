@@ -1,7 +1,8 @@
 import React from "react";
 import { FaUserPen, FaUserSlash } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query'
-import { AlertFetching, AlertError } from "../Alert";
+import AlertFetching from "../Alert/AlertFetching";
+import AlertError  from "../Alert/AlertError";
 import Link from "next/link";
 import { API_URI } from "../../../common/constant";
 

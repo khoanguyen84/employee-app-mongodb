@@ -7,7 +7,9 @@ import { FaArrowLeftLong, FaUserPen, FaXmark } from "react-icons/fa6";
 import * as yup from "yup"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { AlertFetching, AlertSuccess, AlertError } from './../../components/Alert';
+import AlertError from './../../components/Alert/AlertError';
+import AlertSuccess from './../../components/Alert/AlertSuccess';
+import AlertFetching from './../../components/Alert/AlertFetching';
 import { API_URI } from "../../../common/constant";
 
 const schema = yup.object({
