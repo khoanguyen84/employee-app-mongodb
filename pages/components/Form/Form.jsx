@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AlertSuccess } from "../Alert";
+import { API_URI } from "../../../common/constant";
 
 const schema = yup.object({
     firstname: yup.string().required(),
@@ -22,7 +23,7 @@ function Form() {
 
     const mutation = useMutation({
         mutationFn: async (employee) => {
-            let res = await fetch('http://localhost:3000/api/employees', {
+            let res = await fetch(`${API_URI}/api/employees`, {
                 method: "POST",
                 headers: {
                     "Content-Type": 'application/json'

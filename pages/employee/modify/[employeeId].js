@@ -7,6 +7,7 @@ import * as yup from "yup"
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { AlertFetching, AlertSuccess, AlertError } from './../../components/Alert';
+import { API_URI } from "../../../common/constant";
 
 const schema = yup.object({
     firstname: yup.string().required(),
@@ -25,7 +26,7 @@ export default function ModifyEmployee() {
     const { query } = useRouter()
 
     const fetchingData = async () => {
-        let res = await fetch(`http://localhost:3000/api/employees/${query.employeeId}`, {
+        let res = await fetch(`${API_URI}/api/employees/${query.employeeId}`, {
             headers: { 'Content-type': 'application/json' }
         })
         let data = await res.json()
@@ -38,7 +39,7 @@ export default function ModifyEmployee() {
 
     const mutation = useMutation({
         mutationFn: async (employee) => {
-            let res = await fetch(`http://localhost:3000/api/employees/${query.employeeId}`, {
+            let res = await fetch(`${API_URI}/api/employees/${query.employeeId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": 'application/json'

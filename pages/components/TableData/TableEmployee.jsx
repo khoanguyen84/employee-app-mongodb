@@ -3,11 +3,11 @@ import { FaUserPen, FaUserSlash } from "react-icons/fa6";
 import { useQuery } from '@tanstack/react-query'
 import { AlertFetching, AlertError } from "../Alert";
 import Link from "next/link";
-import Image from "next/image";
+import { API_URI } from "../../../common/constant";
 
 function TableEmployee() {
     const fetchingData = async () => {
-        let res = await fetch('http://localhost:3000/api/employees', {
+        let res = await fetch(`${API_URI}/api/employees`, {
             headers: { 'Content-type': 'application/json' }
         })
         let data = await res.json()
