@@ -1,8 +1,8 @@
+'use client'
 import Form from './components/Form/Form'
 import TableEmployee from './components/TableData/TableEmployee'
 import { FaPersonCirclePlus } from "react-icons/fa6";
 import { useState } from 'react';
-import MainLayout from './components/MainLayout';
 
 export default function Home() {
   const [toggleForm, setToggleForm] = useState(false)

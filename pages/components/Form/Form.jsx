@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { FaUserPlus, FaXmark } from "react-icons/fa6";
 import { useForm } from "react-hook-form"
